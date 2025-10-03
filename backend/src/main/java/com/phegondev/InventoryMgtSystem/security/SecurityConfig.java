@@ -40,7 +40,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
+//                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
