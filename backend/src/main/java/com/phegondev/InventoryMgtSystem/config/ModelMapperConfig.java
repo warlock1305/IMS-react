@@ -11,9 +11,15 @@ import java.util.*;
 import com.phegondev.InventoryMgtSystem.models.User;
 import com.phegondev.InventoryMgtSystem.models.Category;
 import com.phegondev.InventoryMgtSystem.models.Transaction;
+import com.phegondev.InventoryMgtSystem.models.Restaurant;
+import com.phegondev.InventoryMgtSystem.models.Attraction;
+import com.phegondev.InventoryMgtSystem.models.Review;
 import com.phegondev.InventoryMgtSystem.dtos.UserDTO;
 import com.phegondev.InventoryMgtSystem.dtos.CategoryDTO;
 import com.phegondev.InventoryMgtSystem.dtos.TransactionDTO;
+import com.phegondev.InventoryMgtSystem.dtos.RestaurantDTO;
+import com.phegondev.InventoryMgtSystem.dtos.AttractionDTO;
+import com.phegondev.InventoryMgtSystem.dtos.ReviewDTO;
 
 @Configuration
 public class ModelMapperConfig {
@@ -47,6 +53,20 @@ public class ModelMapperConfig {
 
         mm.createTypeMap(Category.class, CategoryDTO.class)
                 .addMappings(mapper -> mapper.skip(CategoryDTO::setProducts))
+                .implicitMappings();
+
+        // For Restaurant -> RestaurantDTO, skip reviews to avoid collection mapping issues
+        mm.createTypeMap(Restaurant.class, RestaurantDTO.class)
+                .addMappings(mapper -> mapper.skip(RestaurantDTO::setReviews))
+                .implicitMappings();
+
+        // For Attraction -> AttractionDTO, skip reviews to avoid collection mapping issues
+        mm.createTypeMap(Attraction.class, AttractionDTO.class)
+                .addMappings(mapper -> mapper.skip(AttractionDTO::setReviews))
+                .implicitMappings();
+
+        // For Review -> ReviewDTO, no associations to skip
+        mm.createTypeMap(Review.class, ReviewDTO.class)
                 .implicitMappings();
 
         // For Transaction -> TransactionDTO: no global skips here to avoid configuration conflicts.
