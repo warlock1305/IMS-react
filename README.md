@@ -1,5 +1,7 @@
 # Project Setup
 
+## This is the working project version and setup instructions after the meeting
+
 This project consists of a **frontend** (React) and a **backend** (Spring Boot / Maven). Follow the steps below to set up and run both parts.
 
 ---
